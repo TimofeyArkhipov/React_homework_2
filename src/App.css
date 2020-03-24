@@ -58,6 +58,9 @@
   }
 }
 
+a:hover{
+  color: blue;
+}
 
 @keyframes App-logo-spin {
   from {

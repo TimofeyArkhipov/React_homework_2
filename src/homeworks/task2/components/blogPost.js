@@ -5,12 +5,13 @@ import ListItemText from '@material-ui/core/ListItemText';
 
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
+import Comment from "./comment";
 
-
-class Posts extends Component {
+class PostsList extends Component {
     state = {
         posts: [],
         fetchComplete: false,
+        click: false,
     }
 
     componentDidMount(){
@@ -22,39 +23,40 @@ class Posts extends Component {
             })
     }
 
+
+
+
+
     render(){
-        let item = this.state.posts;
-        const {fetchComplete} = this.state;
+        let {fetchComplete, posts} = this.state;
         if (!fetchComplete) return <div className='loader'></div>
         return(
-
                 <Container maxWidth="md" component="main">
                     <h1>Posts list</h1>
-                    {item.map(post =>
+                    {posts.map(post =>
                         <Paper>
-                        <Container onClick={() => {this.props.openInfo(post.userId)}}>
-                            <div className="postContainer">
-                                <Typography component="h4" variant="h4" color="textPrimary">
+                        <Container>
+                            <div onClick={() => {
+                                this.props.openInfo(post.userId)
+                            }}  className="postContainer">
+                                <Typography key={post.id} component="h4" variant="h4" color="textPrimary">
                                    Post# {post.id}
                                 </Typography>
                                 <Typography className="postTitle" component="h2" variant="h5" color="textPrimary">
                                     {post.title}
                                 </Typography>
-                                <ListItemText primary="Body"/>
-                                {/*{this.state.more === true ?*/}
-                                {/*<Typography component="p" variant="h6" color="textPrimary">*/}
-                                {/*    {post.title}*/}
-                                {/*</Typography> : null}*/}
+                                <ListItemText>
+                                    {post.body}
+                                </ListItemText>
+                                <Comment commentId={post.id}/>
                             </div>
                         </Container>
                         </Paper>
                     )}
                 </Container>
-
         )
-        this.setState({more:true})
     }
 }
 
 
-export default Posts;
+export default PostsList;

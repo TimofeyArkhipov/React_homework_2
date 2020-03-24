@@ -36,19 +36,13 @@ class UserInfo extends Component {
     }
 
 
-
-
     render(){
 
         const {fetchComplete, user} = this.state;
-        console.log(user);
         if (!fetchComplete) return <div className='loader'></div>
-
-
         return(
             <Container maxWidth="md" component="main">
                 <h1>User detale</h1>
-
                 <div >
                     <Paper className="userInfoBLock">
                         <Grid container wrap="nowrap" spacing={2}>
